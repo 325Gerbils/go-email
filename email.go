@@ -6,53 +6,36 @@ import (
 
 )
 
-// Service contains data used to send emails
-type Service struct {
-	Email      string
-	Pass       string
-	Message    string
-	Subject    string
-	SMTPServer string
-	SMTPPort   string
-	Msg        string
-	Auth       smtp.Auth
+var (
+	authEmail  string
+	authPass   string
+	smtpServer string
+	smtpPort   string
+	plainAuth  smtp.Auth
+)
+
+// Auth initializes an smtp.PlainAuth variable
+// Whether the authentication worked is not checked until an email is sent
+func Auth(email, pass, smtpDomain string) {
+	serverAndPort := strings.Split(smtpDomain, ":")
+	smtpServer, smtpPort = serverAndPort[0], serverAndPort[1]
+	plainAuth = smtp.PlainAuth("", email, pass, smtpServer)
 }
 
-// Authenticate authenticates the email service
-func Authenticate(user, pass string) *Service {
-	e := &Service{}
-	e.Email = user
-	e.Pass = pass
-	e.SMTPServer = "smtp.gmail.com"
-	e.SMTPPort = ":587"
-	auth := smtp.PlainAuth("", e.Email, e.Pass, e.SMTPServer)
-	e.Auth = auth
-	return e
-}
+// Send attempts to send an email with the specified content
+// Will return an error if the email cannot be sent
+// Todo: add attachments=[]string{filenames} as an argument
+func Send(recip, subject, message string) error {
+	var content string
 
-// SetSubject sets the subject of the email
-func (e *Service) SetSubject(subject string) {
-	e.Subject = subject
-	e.Msg += "Subject: " + subject + "\r\n"
-}
+	content += "To: " + recip + "\r\n"
+	content += "Subject: " + subject + "\r\n"
+	content += "Message: " + message + "\r\n"
 
-// Write adds a line to the email body
-func (e *Service) Write(line string) {
-	e.Message += line + "\n"
-}
-
-// Send sends the email
-func (e *Service) Send(to []string) error {
-
-	e.Msg += "To: " + strings.Join(to, "\r\n")
-	e.Msg += "Subject: " + e.Subject + "\r\n"
-	e.Msg += e.Message
-
-	msg := []byte(e.Msg)
-
-	err := smtp.SendMail(e.SMTPServer+e.SMTPPort, e.Auth, e.Email, to, msg)
+	err := smtp.SendMail(smtpServer+smtpPort, plainAuth, authEmail, []string{recip}, []byte(content))
 	if err != nil {
 		return err
 	}
+
 	return nil
 }

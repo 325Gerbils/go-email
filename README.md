@@ -1,8 +1,8 @@
 # go-email
 
-Simple package to send text emails. It's a wrapper for go's smtp library to reduce the lines of code required to send an extremely simple email. See the source code for a better understanding of the use cases and limitations - the source code is shorter than this documentation. 
+Simple package to send text emails. It's a wrapper for go's smtp library to reduce the lines of code required to send an extremely simple email. See the source code for a better understanding of the use cases and limitations - it is shorter than this documentation. 
 
-THIS IS NOT THREAD-SAFE. To hack in thread-safety, lock a mutex before calling the functions and unlock it afterwards. See usage examples
+THE RAW FUNCTIONS ARE NOT THREAD-SAFE. To hack in thread-safety, lock a mutex before calling the functions and unlock it afterwards. See usage examples.
 
 ### Installation:
 
@@ -27,7 +27,7 @@ if err != nil {
 }
 ```
 
-Thread-safe hack:
+Thread-safety hack:
 
 ```go
 

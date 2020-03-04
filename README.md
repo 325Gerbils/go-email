@@ -55,3 +55,8 @@ if err != nil {
 }
 mut.Unlock()
 ```
+
+### Todo:
+
+* Built-in thread safety
+* Attachment handling

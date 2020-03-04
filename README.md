@@ -6,7 +6,7 @@ THE RAW FUNCTIONS ARE NOT THREAD-SAFE. To hack in thread-safety, lock a mutex be
 
 ### Installation:
 
-`go get github.com/325gerbils/go-email`
+`go get -u -v github.com/325gerbils/go-email`
 
 ### Usage:
 
@@ -14,7 +14,7 @@ THE RAW FUNCTIONS ARE NOT THREAD-SAFE. To hack in thread-safety, lock a mutex be
 import (
     "log"
     
-    email "github.com/325gerbils/go-email"
+    "github.com/325gerbils/go-email"
 )
 
 // Add authentication data
@@ -35,7 +35,7 @@ import (
     "log"
     "sync"
     
-    email "github.com/325gerbils/go-email"
+    "github.com/325gerbils/go-email"
 )
 
 mut := sync.Mutex{}

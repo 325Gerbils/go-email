@@ -11,6 +11,7 @@ Simple package to send text emails. THIS IS NOT THREAD-SAFE. To hack in thread-s
 ```go
 import (
     "log"
+    
     email "github.com/325gerbils/go-email"
 )
 
@@ -27,15 +28,22 @@ if err != nil {
 Thread-safe hack:
 
 ```go
-// Thread-safe sending:
-import "sync"
+
+import (
+    "log"
+    "sync"
+    
+    email "github.com/325gerbils/go-email"
+)
 
 mut := sync.Mutex{}
 
+// Lock to this thread and auth
 mut.Lock()
 email.Auth("username@gmail.com", "myPassword", "smtp.gmail.com:587")
 mut.Unlock()
 
+// Lock to this thread and send
 mut.Lock()
 err := email.Send("recipient@website.com", "Subject", "This is what will appear in the email body")
 if err != nil {

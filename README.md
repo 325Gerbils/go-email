@@ -6,7 +6,9 @@ THE RAW FUNCTIONS ARE NOT THREAD-SAFE. To hack in thread-safety, lock a mutex be
 
 ### Installation:
 
-`go get -u -v github.com/325gerbils/go-email`
+```
+go get -u -v github.com/325gerbils/go-email
+```
 
 ### Usage:
 

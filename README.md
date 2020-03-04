@@ -1,8 +1,6 @@
 # go-email
 
-Simple package to send text emails. It's a wrapper for go's smtp library to reduce the lines of code required to send an extremely simple email.
-
-It consists of two functions Auth() and Send(). Auth creates a private smtp.PlainAuth and stores it for later use, Send encodes the arguments into an email body, then uses the PlainAuth to send the email. View the source code for a better understanding of what's going on. The source code is shorter than this documentation.
+Simple package to send text emails. It's a wrapper for go's smtp library to reduce the lines of code required to send an extremely simple email. See the source code for a better understanding of the use cases and limitations - the source code is shorter than this documentation. 
 
 THIS IS NOT THREAD-SAFE. To hack in thread-safety, lock a mutex before calling the functions and unlock it afterwards. See usage examples
 

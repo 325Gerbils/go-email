@@ -32,7 +32,7 @@ func Send(recip, subject, message string) error {
 	content += "Subject: " + subject + "\r\n"
 	content += "Message: " + message + "\r\n"
 
-	err := smtp.SendMail(smtpServer+smtpPort, plainAuth, authEmail, []string{recip}, []byte(content))
+	err := smtp.SendMail(smtpServer+":"+smtpPort, plainAuth, authEmail, []string{recip}, []byte(content))
 	if err != nil {
 		return err
 	}
